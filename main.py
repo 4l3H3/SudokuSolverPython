@@ -1,13 +1,13 @@
 matrix = [
+    [8, 6, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 5, 9],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 6, 0, 8, 0, 0],
+    [0, 4, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 5, 3, 0, 0, 0, 0, 7],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 2, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 2, 0, 0, 0, 0, 6, 0, 0],
+    [0, 0, 7, 5, 0, 9, 0, 0, 0]
 ]
 
 found_solutions = 0
@@ -23,8 +23,8 @@ def fits_in_column(number, xindex, matrix):
 
 
 def fits_in_row(number, yindex, matrix):
-    for index in range(0, len(matrix)):
-        if matrix[index][yindex] == number:
+    for xindex in range(0, len(matrix)):
+        if matrix[xindex][yindex] == number:
             return False
     return True
 
