@@ -1,16 +1,70 @@
-# This is a sample Python script.
+matrix = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+found_solutions = 0
+
+EMPTY = 0
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def fits_in_column(number, xindex, matrix):
+    for yindex in range(0, len(matrix)):
+        if matrix[xindex][yindex] == number:
+            return False
+    return True
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def fits_in_row(number, yindex, matrix):
+    for index in range(0, len(matrix)):
+        if matrix[index][yindex] == number:
+            return False
+    return True
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def fits_in_square(number, xindex, yindex, matrix):
+    for x_index in range(xindex - xindex % 3, xindex - xindex % 3 + 3):
+        for y_index in range(yindex - yindex % 3, yindex - yindex % 3 + 3):
+            if matrix[x_index][y_index] == number:
+                return False
+    return True
+
+
+def fits_in_tile(number, xindex, yindex, matrix):
+    return fits_in_column(number, xindex, matrix) and fits_in_row(number, yindex, matrix) and fits_in_square(number,
+                                                                                                             xindex,
+                                                                                                             yindex,
+                                                                                                             matrix)
+
+
+def print_solution(matrix):
+    global found_solutions
+    found_solutions += 1
+    print("Loesung " + str(found_solutions))
+    for xindex in range(len(matrix)):
+            print(str(matrix[xindex][:]) + " ")
+    print()
+
+
+def solve_sudoku(matrix):
+    for xIndex in range(len(matrix)):
+        for yindex in range(len(matrix[xIndex])):
+            if matrix[xIndex][yindex] == EMPTY:
+                for number in range(1, 10):
+                    if fits_in_tile(number, xIndex, yindex, matrix):
+                        matrix[xIndex][yindex] = number
+                        if solve_sudoku(matrix):
+                            print_solution(matrix)
+                        matrix[xIndex][yindex] = 0
+                return False
+    return True
+
+
+solve_sudoku(matrix)
