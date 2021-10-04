@@ -1,18 +1,22 @@
+import time
+
 matrix = [
-    [8, 6, 0, 0, 2, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 0, 5, 9],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 6, 0, 8, 0, 0],
-    [0, 4, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 5, 3, 0, 0, 0, 0, 7],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 2, 0, 0, 0, 0, 6, 0, 0],
-    [0, 0, 7, 5, 0, 9, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
 found_solutions = 0
 
 EMPTY = 0
+
+start_time = time.time()
 
 
 def fits_in_column(number, xindex, matrix):
@@ -46,10 +50,12 @@ def fits_in_tile(number, xindex, yindex, matrix):
 
 def print_solution(matrix):
     global found_solutions
+    global start_time
+    end_time = time.time() - start_time
     found_solutions += 1
-    print("Loesung " + str(found_solutions))
+    print("Loesung " + str(found_solutions) + " gefunden nach " + str(end_time))
     for xindex in range(len(matrix)):
-            print(str(matrix[xindex][:]) + " ")
+        print(str(matrix[xindex][:]) + " ")
     print()
 
 
